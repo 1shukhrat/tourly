@@ -1,0 +1,101 @@
+<div class="tour-container">
+    <div class="tour-details">
+      <h1 id="tour-name" class="tour-name"></h1>
+      <div class="tour-images">
+        <img id="tour-image" src="" alt="Tour image" class="tour-image">
+      </div>
+      <div class="tour-info">
+        <h2>Описание</h2>
+        <p id="tour-description"></p>
+        <h2>Продолжительность</h2>
+        <p>Дней: <span id="day-duration"></span>, Ночей: <span id="night-duration"></span></p>
+        <h2>Цена</h2>
+        <p><span id="tour-price"></span> руб.</p>
+        <h2>Отель</h2>
+        <div id="hotel-info"></div>
+        <h2>Виза</h2>
+        <p id="visa-required"></p>
+        <h2>Места</h2>
+        <p id="tour-places"></p>
+      </div>
+      <div class="flight-info">
+        <h2>Вылет</h2>
+        <p>Место отправления: <span id="departure-place"></span></p>
+        <p>Место прибытия: <span id="arrival-place"></span></p>
+        <p>Дата и время: <span id="departure-time"></span></p>
+        <h2>Возвращение</h2>
+        <p>Место отправления: <span id="return-departure-place"></span></p>
+        <p>Место прибытия: <span id="return-arrival-place"></span></p>
+        <p>Дата и время: <span id="return-time"></span></p>
+      </div>
+      <button id="book-button" class="btn btn-primary">Забронировать</button>
+    </div>
+  </div>
+
+  При нажатии на кнопку book-tour-btn пусть открывается модальное окно, где пользователю нужно ввести данные пассажиров, каждый пассажиров отделен блоком и видимой границей, уже в самом блоке пассажира, нужно ввести самые данные пассажира : имя фамилия отчество дата рождения, пол сделать в виде select.
+Далее нужно ввести данные паспорта: серия, дата выдачи и место выдачи
+и также, если tour.type == 'Международный' то также нужно ввести данные загранпаспорта: имя фамилия дата выдачи место выдачи дата истечения. номер 
+
+данные туриста, паспорт и загранпаспорта также сделать отдельными блоками с видимыми границами 
+
+прямо в самом окне должна быть кнопка + при нажатии на которую появляется форма на еще одного пассажира
+ну и в конце кнопка отправить
+
+
+
+
+const requestCard = document.createElement('div');
+                requestCard.classList.add('request-card');
+
+                requestCard.innerHTML = `
+                    <div class="request-summary">
+                        <p>ID заявки: ${request._id}</p>
+                        <p>Тур: ${request.tour.name}</p>
+                        ${request.status === 'Оплата' ? `<button onclick="pay('${request._id}')" id="pay_request" class="toggle-details-btn" data-request-id="' + request._id + '">Оплатить</button>` : ''}
+                        <button class="toggle-details-btn">Подробнее</button>
+                        <button class="delete-request-btn" data-request-id="${request._id}">Удалить</button>
+                    </div>
+                    <div class="request-details" style="display: none;">
+                        <p>Дата: ${new Date(request.date).toLocaleDateString()}</p>
+                        <p>Статус: ${request.status}</p>
+                        <p>Цена: ${request.price} ₽</p>
+                        <p>Туристы:</p>
+                        <ul style = 'border: 1px solid #ddd;'>
+                            ${request.tourists.map(tourist => `
+                                <li>
+                                    ${tourist.lastName} ${tourist.firstName} ${tourist.middleName}
+                                    <ul style = 'border: 1px solid #ddd;' >
+                                        <li>Дата рождения: ${new Date(tourist.dateOfBirth).toLocaleDateString()}</li>
+                                        <li>Пол: ${tourist.gender}</li>
+                                        <li>Паспорт: ${tourist.passport.series}, выдан ${new Date(tourist.passport.dateOfIssue).toLocaleDateString()} ${tourist.passport.issuedBy}</li>
+                                        ${tourist.internationalPassport ? `
+                                            <li style = 'border: 1px solid #ddd;' >Заграничный паспорт: ${tourist.internationalPassport.series}, выдан ${new Date(tourist.internationalPassport.dateOfIssue).toLocaleDateString()} ${tourist.internationalPassport.issuedBy}, истекает ${new Date(tourist.internationalPassport.dateOfExpiry).toLocaleDateString()}</li>
+                                        ` : ''}
+                                    </ul>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <p>Тур:</p>
+                        <ul style = 'border: 1px solid #ddd;' >
+                            <li>Описание: ${request.tour.description}</li>
+                            <li>Продолжительность: ${request.tour.dayDuration} дней / ${request.tour.nightDuration} ночей</li>
+                            <li>Цена: ${request.tour.price} ₽</li>
+                            <li>Отель: ${request.tour.hotel.name}, ${request.tour.hotel.address}, ${request.tour.hotel.rating} звёзд</li>
+                            <li>Тип питания: ${request.tour.hotel.nutrition.join(', ')}</li>
+                            <li>Тип тура: ${request.tour.type}</li>
+                            <li>Виза: ${request.tour.visa ? 'Требуется' : 'Не требуется'}</li>
+                            <li>Места: ${request.tour.places}</li>
+                        </ul>
+                        <p>Рейсы:</p>
+                        <ul style = 'border: 1px solid #ddd;' >
+                            <li>Рейс туда: из ${request.tour.departureFlight.departurePlace.name} в ${request.tour.departureFlight.arrivalPlace.name} ${new Date(request.tour.departureFlight.departureTime).toLocaleString()}</li>
+                            <li>Рейс обратно: из ${request.tour.returnFlight.departurePlace.name} в ${request.tour.returnFlight.arrivalPlace.name} ${new Date(request.tour.returnFlight.departureTime).toLocaleString()}</li>
+                        </ul>
+                    </div>
+                `;
+                
+
+                ordersTab.appendChild(requestCard);
+      
+
+

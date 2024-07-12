@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Manager Page</title>
+    <link rel="stylesheet" href="assets/css/sales-manager.css">
+</head>
+<body id="manager-body">
+
+<div class="manager-navbar">
+    <div class="manager-container">
+        <h1 class="manager-h1">Панель менеджера по продажам</h1>
+        <button class="manager-btn manager-btn-primary btn-white manager-logout-btn" onclick="logout()">Выйти</button>
+    </div>
+</div>
+
+<div class="manager-container">
+    <div class="manager-tabs">
+        <button class="manager-tab active" data-tab="manager-requests">Заявки</button>
+    </div>
+    <hr style="top: 177.9px; position: absolute; width: 97.2%;">
+    <div class="manager-tab-content active" id="manager-requests">
+        <div class="manager-sidebar">
+            <button class="manager-btn manager-btn-primary manager-filter-btn" data-role="all" onclick="filterRequests('all')">Все</button>
+            <button class="manager-btn manager-btn-primary manager-filter-btn" data-role="Подано" onclick="filterRequests('Подано')">Подано</button>
+            <button class="manager-btn manager-btn-primary manager-filter-btn" data-role="Оплата" onclick="filterRequests('Оплата')">Оплата</button>
+            <button class="manager-btn manager-btn-primary manager-filter-btn" data-role="Приглашение в офис" onclick="filterRequests('Приглашение в офис')">Офис</button>
+            <button class="manager-btn manager-btn-primary manager-filter-btn" data-role="Готово" onclick="filterRequests('Готово')">Готово</button>
+        </div>
+        <div class="manager-request-list-wrapper">
+            <input type="text" id="manager-search-input" class="manager-search-input" placeholder="Поиск по имени..." onkeyup="searchRequests()">
+            <ul class="manager-request-list" id="requests">
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="assets/js/sales-manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body id="admin-body">
+
+<div class="admin-navbar">
+    <div class="admin-container">
+        <h1 class="admin-h1">Панель администратора</h1>
+        <button class="admin-btn admin-btn-primary btn-white admin-logout-btn" onclick="logout()">Выйти</button>
+    </div>
+</div>
+
+<div class="admin-container">
+    <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="admin-users">Пользователи</button>
+        <button class="admin-tab" data-tab="admin-requests">Запросы</button>
+    </div>
+    <hr style="top: 177.9px; position: absolute; width: 97.2%;">
+    <div class="admin-tab-content active" id="admin-users">
+        <div class="admin-sidebar">
+            <button class="admin-btn admin-btn-primary admin-filter-btn" data-role="all" onclick="filterUsers('all')">Все</button>
+            <button class="admin-btn admin-btn-primary admin-filter-btn" data-role="contentManager" onclick="filterUsers('CONTENT_MANAGER')">Контент-менеджеры</button>
+            <button class="admin-btn admin-btn-primary admin-filter-btn" data-role="salesManager" onclick="filterUsers('SALES_MANAGER')">Менеджеры по продажам</button>
+            <button class="admin-btn admin-btn-primary admin-filter-btn" data-role="user" onclick="filterUsers('USER')">Клиенты</button>
+        </div>
+        <div class="admin-user-list-wrapper">
+            <input type="text" id="admin-search-input" class="admin-search-input" placeholder="Поиск по имени..." onkeyup="searchUsers()">
+            <ul class="admin-user-list" id="users">
+                
+            </ul>
+        </div>
+    </div>
+    <div class="admin-tab-content" id="admin-requests">
+        <ul class="admin-user-list-wrapper" id="requests">
+
+        </ul>
+    </div>
+</div>
+
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <form id="editForm">
+            <!-- Динамически заполняемая форма -->
+        </form>
+    </div>
+</div>
+
+<script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

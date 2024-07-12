@@ -1,0 +1,209 @@
+select {
+    background-color: hsl(0, 0%, 100%);
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: hsl(0, 0%, 20%);
+}
+
+
+input,
+button,
+textarea {
+    background: none;
+    border: none;
+    font: inherit;
+}
+
+input {
+    width: 100%;
+}
+
+ion-icon {
+    pointer-events: none;
+}
+
+li {
+    list-style: none;
+}
+
+
+#manager-body {
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+.manager-navbar {
+    background-color: hsl(214, 57%, 51%);
+    padding: 10px 20px;
+    color: white;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.manager-navbar>.manager-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.manager-container {
+    padding: 20px;
+}
+
+.manager-h1 {
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+}
+
+.manager-btn {
+    color: hsl(0, 0%, 100%);
+    text-transform: uppercase;
+    font-size: 14px;
+    border-radius: 100px;
+    padding: 8px 18px;
+    border: 2px solid transparent;
+    transition: 0.25s ease-in-out;
+}
+
+.manager-btn-primary {
+    background: hsl(214, 57%, 51%);
+    border-color: hsl(214, 57%, 51%);
+}
+
+.manager-btn-primary:is(:hover, :focus) {
+    background: hsl(214, 72%, 33%);
+    border-color: hsl(214, 72%, 33%);
+}
+
+.manager-tab-content {
+    display: flex;
+}
+
+.manager-sidebar {
+    flex: 0 0 270px;
+    padding-right: 20px;
+}
+
+.manager-request-list-wrapper {
+    flex: 1;
+}
+
+.manager-search-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.manager-request-item {
+    border: 1px solid hsl(0, 0%, 80%);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.manager-request-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.manager-request-summary span {
+    flex-grow: 1;
+}
+
+.manager-profile-btn {
+    margin-right: 10px;
+}
+
+.manager-user-role {
+    margin-left: 950px;
+    font-weight: bold;
+}
+
+.manager-request-details {
+    display: none;
+    margin-top: 10px;
+}
+
+.manager-request-item.active .manager-request-details {
+    display: block;
+}
+
+.manager-tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.manager-tab {
+    padding: 10px 20px;
+    background-color: hsl(214, 57%, 51%);
+    color: #fff;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.manager-tab.active {
+    background-color: hsl(214, 72%, 33%);
+}
+
+.manager-tab-content {
+    display: none;
+}
+
+.manager-tab-content.active {
+    display: flex;
+}
+
+.manager-filter-btn {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.btn-white {
+    background: white;
+    border-color: white;
+    color: hsl(214, 57%, 51%);
+}
+
+.btn-white:is(:hover, :focus) {
+    background: hsl(216, 4%, 76%);
+    border-color: hsl(216, 4%, 76%);
+}
+
+.btn-red {
+    background: red;
+    border-color: red;
+}
+
+.btn-red:is(:hover, :focus) {
+    background: brown;
+    border-color: brown;
+}
+
+.button-actions {
+    display: flex;
+}
+
+.button-actions>button {
+    margin-right: 10px;
+}
+
+.manager-request-details div {
+    border: 1px solid #ddd;
+  border-radius: 10px; 
+  padding-left: 10px;
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Manager Page</title>
+    <link rel="stylesheet" href="./assets/css/content-manager.css">
+</head>
+
+<body id="content-manager-body">
+
+    <div class="content-manager-navbar">
+        <div class="content-manager-container">
+            <h1 class="content-manager-h1">Панель контент-менеджера</h1>
+            <button class="content-manager-btn content-manager-btn-primary btn-white content-manager-logout-btn"
+                onclick="logout()">Выйти</button>
+        </div>
+    </div>
+
+    <div class="content-manager-container">
+        <div class="content-manager-tabs">
+            <button class="content-manager-tab active" data-tab="content-tours">Туры</button>
+            <button class="content-manager-tab" data-tab="content-hotels">Отели</button>
+            <button class="content-manager-tab" data-tab="content-flights">Рейсы</button>
+            <button class="content-manager-tab" data-tab="content-create">Создать</button>
+        </div>
+        <hr style="top: 177.9px; position: absolute; width: 97.2%;">
+        <div class="content-manager-tab-content active" id="content-tours">
+            <div class="content-manager-sidebar">
+                <button class="content-manager-btn content-manager-btn-primary content-manager-filter-btn"
+                    data-type="all" onclick="filterContent('all')">Все</button>
+                <button class="content-manager-btn content-manager-btn-primary content-manager-filter-btn"
+                    data-type="domestic" onclick="filterContent('domestic')">Внутренние</button>
+                <button class="content-manager-btn content-manager-btn-primary content-manager-filter-btn"
+                    data-type="international" onclick="filterContent('international')">Международные</button>
+            </div>
+            <div class="content-manager-list-wrapper">
+                <input type="text" id="content-manager-tour-search-input" class="content-manager-search-input"
+                    placeholder="Поиск по названию..." onkeyup="searchContent()">
+                <ul class="content-manager-list" id="tours">
+                    <!-- Список туров -->
+                </ul>
+            </div>
+        </div>
+        <div class="content-manager-tab-content" id="content-hotels">
+            <div class="content-manager-list-wrapper">
+                <input type="text" id="content-manager-hotel-search-input" class="content-manager-search-input"
+                    placeholder="Поиск по названию..." onkeyup="searchContent()">
+                <ul class="content-manager-list" id="hotels">
+                    <!-- Список отелей -->
+                </ul>
+            </div>
+        </div>
+        <div class="content-manager-tab-content" id="content-flights">
+            <div class="content-manager-list-wrapper">
+                <input type="text" id="content-manager-flight-search-input" class="content-manager-search-input"
+                    placeholder="Поиск по названию..." onkeyup="searchContent()">
+                <ul class="content-manager-list" id="flights">
+                    <!-- Список рейсов -->
+                </ul>
+            </div>
+        </div>
+        <div class="content-manager-tab-content" id="content-create">
+            <form id="createForm">
+                <select id="createType" class="content-manager-input" onchange="toggleCreateForm()">
+                    <option value="" selected>Выберите тип</option>
+                    <option value="tour">Тур</option>
+                    <option value="hotel">Отель</option>
+                    <option value="flight">Рейс</option>
+                </select>
+                <div id="tourForm" class="content-manager-form" style="display:none;">
+                    <div class="form-group">
+                        <label for="tourName">Название</label>
+                        <input type="text" id="tourName" class="content-manager-input"  required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourDescription">Описание</label>
+                        <textarea id="tourDescription" required cols="45"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="countOfDays">Количество дней</label>
+                        <input type="number" id="countOfDays" class="content-manager-input"  min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="countOfNights">Количество ночей</label>
+                        <input type="number" id="countOfNights" class="content-manager-input"  min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="countOfPlaces">Количество мест</label>
+                        <input type="number" id="countOfPlaces" class="content-manager-input"  min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourPrice">Цена, ₽</label>
+                        <input type="number" id="tourPrice" class="content-manager-input" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tourPhoto">Фотография</label>
+                        <input type="file" id="tourPhoto" accept="image/*" class="content-manager-input" required>
+                    </div>
+                    <div class="form-group content-manager-radio-group">
+                        <p>Тип</p>
+                        <input type="radio" name="tourType" value="Внутренний" class="content-manager-input" required checked> <p>Внутренний</p>
+                        <input type="radio" name="tourType" value="Международный" class="content-manager-input" required> <p>Международный</p>
+                    </div>
+                    <div class="form-group">
+                        <label for="hotel-tour-select">Отель</label>
+                        <select id="hotel-tour-select" class="form-group">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-departure-tour">Отправление</label>
+                        <select id="flight-departure-tour" class="form-group flight-tour-select">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-arrival-tour">Прибытие</label>
+                        <select id="flight-arrival-tour" class="form-group flight-tour-select">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group content-manager-radio-group">
+                        <P>Виза</P>
+                        <input type="radio" name="isVisa" value="true" class="content-manager-input" required> <p>Да</p>
+                        <input type="radio" name="isVisa" value="false" class="content-manager-input" required checked> <p>Нет</p>
+                    </div>
+                    <button type="button" class="content-manager-btn content-manager-btn-primary"
+                        onclick="createTour()">Создать Тур</button>
+                </div>
+
+                <div id="hotelForm" class="content-manager-form" style="display:none;">
+                    <div>
+                        <div class="form-group">
+                            <label for="hotelName">Название</label>
+                            <input type="text" id="hotelName" class="content-manager-input"  required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hotelAdress">Адрес</label>
+                            <input type="text" id="hotelAddress" class="content-manager-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hotelRating">Рейтинг</label>
+                            <input type="number" id="hotelRating" class="content-manager-input"  min="0" max="5"required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hotelPhoto">Фотография</label>
+                            <input type="file" id="hotelPhoto" accept="image/*" class="content-manager-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="hotelTypeSelect">Тип</label>
+                        <select id="hotelTypeSelect"class="form-group">
+                            <option value="Отель">Отель</option>
+                            <option value="Апартаменты">Апартаменты</option>
+                            <option value="Гостевой дом">Гостевой дом</option>
+                            <option value="Хостел">Хостел</option>
+                            <option value="Вилла">Вилла</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nutritionSelect">Питание</label>
+                        <select id="nutritionSelect" class="form-group" multiple>
+                            <option value="Завтрак">Завтрак</option>
+                            <option value="Обед">Обед</option>
+                            <option value="Ужин">Ужин</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceSelect">Услуги</label>
+                        <select id="serviceSelect" class="form-group" multiple>
+                            
+                        </select>
+                    </div>
+                    <button type="button" class="content-manager-btn content-manager-btn-primary"
+                        onclick="createHotel()">Создать Отель</button>
+                </div>
+                <div id="flightForm" class="content-manager-form" style="display:none;">
+                    <div class="form-group">
+                        <label for="flight-departure-country">Отправление - Страна</label>
+                        <select id="flight-departure-country" class="form-group flight-tour-select">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-departure-city">Отправление - Город</label>
+                        <select id="flight-departure-city" class="form-group flight-tour-select">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-arrival-country">Прибытие - Страна</label>
+                        <select id="flight-arrival-country" class="form-group flight-tour-select">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-arrival-city">Прибытие - Город</label>
+                        <select id="flight-arrival-city" class="form-group flight-tour-select">
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="departureTime">Дата отправления </label>
+                        <input type="datetime-local" id="departureTime" class="content-manager-input" required>
+                    </div>
+                    <button type="button" class="content-manager-btn content-manager-btn-primary"
+                        onclick="createFlight()">Создать Рейс</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <form id="editForm">
+                <!-- Динамически заполняемая форма -->
+            </form>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="./assets/js/content-manager.js"></script>
+</body>
+
+</html>
